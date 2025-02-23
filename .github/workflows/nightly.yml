@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/oioioi:master
-
+      options: --user root
+      
     steps:
     - uses: actions/checkout@v3
 
