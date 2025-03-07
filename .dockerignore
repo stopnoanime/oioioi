@@ -24,6 +24,10 @@
 /deployment/
 /venv*/
 /.idea/
+/.vscode/
+/.fleet/
+/node_modules/
+/dist-webpack/
 
 # docker specific
 

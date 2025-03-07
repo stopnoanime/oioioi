@@ -2,6 +2,8 @@ import django
 
 import sys
 
+from pathlib import Path
+
 from oioioi.base.utils.finders import find_executable_path
 
 if sys.version_info < (2, 6):
@@ -14,6 +16,8 @@ from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
 
 import oioioi
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLATION_CONFIG_VERSION = 49
 
@@ -881,3 +885,7 @@ REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
     'anon': '1000/day',
     'user': '1000/hour'
 }
+
+STATICFILES_DIRS = [
+    BASE_DIR / "dist-webpack"
+]
