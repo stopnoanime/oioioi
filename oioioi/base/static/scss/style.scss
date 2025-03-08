@@ -1,17 +1,15 @@
 @import "utility";
+@import "bootstrap";
 
-// Import Bootstrap
-@import "../bootstrap/stylesheets/bootstrap";
-
-@import "scss/admin";
-@import "scss/footer";
-@import "scss/navbar";
-@import "scss/table";
-@import "scss/layout";
-@import "scss/markdown-editor";
-@import "scss/spinner";
-@import "scss/language-picker";
-@import "scss/translation-formset";
+@import "admin";
+@import "footer";
+@import "navbar";
+@import "table";
+@import "layout";
+@import "spinner";
+@import "markdown-editor";
+@import "language-picker";
+@import "translation-formset";
 
 body {
   min-width: $oioioi-body-min-width;

@@ -1,9 +1,7 @@
-@import "bootstrap/stylesheets/_functions";
-@import "bootstrap/stylesheets/_variables";
-@import "bootstrap/stylesheets/mixins/_breakpoints";
-@import "bootstrap/stylesheets/mixins/_border-radius";
-@import "bootstrap/stylesheets/mixins/_hover";
-@import "bootstrap/stylesheets/_card";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/card";
 
 .test-actions {
   visibility: hidden;
