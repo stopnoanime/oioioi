@@ -1,45 +1,18 @@
-const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
+
+// This needs to match the setting in default_settings.py
+const COMMON_MEDIA_PREFIX = 'common/'
 
 module.exports = {
   entry: [
     "./oioioi/base/static/js/index.js", 
-    "./oioioi/base/static/scss/style.scss",
-    ...glob.sync("./**/static/common/**/*.{scss,css,js}").map(f => path.resolve(__dirname, f))
+    ...glob.sync(
+      `./**/static/${COMMON_MEDIA_PREFIX}**/*.js`
+    ).map(f => path.resolve(__dirname, f))
   ],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist-webpack'),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.s?css$/i,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              url: false,
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sassOptions: {
-                loadPaths: ["./oioioi/base/static/scss"],
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-  // plugins: [
-  //   new webpack.ProvidePlugin({
-  //     $: 'jquery',
-  //     jQuery: 'jquery',
-  //   })
-  // ]
+  }
 };

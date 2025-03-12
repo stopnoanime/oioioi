@@ -239,6 +239,8 @@ MIDDLEWARE = (
     'oioioi.maintenancemode.middleware.MaintenanceModeMiddleware',
 )
 
+COMMON_MEDIA_PREFIX = 'common/'
+
 ROOT_URLCONF = 'oioioi.urls'
 
 LOGIN_URL = 'two_factor:login'
@@ -247,6 +249,11 @@ LOGOUT_REDIRECT_URL = '/'
 
 COMPRESS_ENABLED = True
 COMPRESS_PARSER = 'compressor.parser.BeautifulSoupParser'
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+LIBSASS_PRECISION = 8
 
 # EXTRA MODULES
 #
@@ -880,5 +887,6 @@ REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
 }
 
 STATICFILES_DIRS = [
-    BASE_DIR / "dist-webpack"
+    BASE_DIR / "dist-webpack",
+    BASE_DIR / "node_modules"
 ]

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-{% load i18n all_with_prefix compress simple_tags get_clocks get_su static %}
+{% load i18n all_with_prefix common_media compress simple_tags get_clocks get_su static %}
 {% site_displayed_tag %}
 
 <html lang="{{ LANGUAGE_CODE|default:"en" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
@@ -17,7 +17,11 @@
         <script src="{{ STATIC_URL }}fontawesomefree/js/all.min.js"></script>
         
         {% block styles %}
+            {% compress css %}
+                <link charset="utf-8" rel="stylesheet" type="text/x-scss" href="{% static 'scss/style.scss' %}">
                 <link href="{{ STATIC_URL }}fontawesomefree/css/all.min.css" rel="stylesheet" type="text/css">
+                {% common_styles %}
+            {% endcompress %}
         {% endblock %}
 
         {% block adminhead %}{% endblock %}
