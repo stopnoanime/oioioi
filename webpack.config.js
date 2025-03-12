@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
 
@@ -6,7 +7,6 @@ const COMMON_MEDIA_PREFIX = 'common/'
 
 module.exports = {
   entry: [
-    "./oioioi/base/static/js/index.js", 
     ...glob.sync(
       `./**/static/${COMMON_MEDIA_PREFIX}**/*.js`
     ).map(f => path.resolve(__dirname, f))
@@ -14,5 +14,11 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist-webpack'),
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    })
+  ]
 };

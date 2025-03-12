@@ -12,14 +12,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% include "ingredients/head-favicon.html" %}
 
-        <script type="text/javascript" src="{% static 'bundle.js' %}"></script>
-
-        <script src="{{ STATIC_URL }}fontawesomefree/js/all.min.js"></script>
+        <script>const oioioi_base_url = "{{ base_url | escapejs }}";</script>
+        <script async src="{% static 'bundle.js' %}"></script>
+        <script async src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+        <script async type="text/javascript" src="{% url 'javascript_catalog' %}"></script>
+        <script async src="{{ mathjax_location }}MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
+        {% block scripts %}{% endblock %}
+
         {% block styles %}
             {% compress css %}
-                <link charset="utf-8" rel="stylesheet" type="text/x-scss" href="{% static 'scss/style.scss' %}">
-                <link href="{{ STATIC_URL }}fontawesomefree/css/all.min.css" rel="stylesheet" type="text/css">
+                <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/style.scss' %}">
                 {% common_styles %}
             {% endcompress %}
         {% endblock %}
@@ -107,29 +110,5 @@
                 {% include "ingredients/footer.html" %}
             {% endblock %}
         </div>
-        {% block scripts %}
-            <script type="text/javascript">const oioioi_base_url = "{{ base_url|escapejs }}";</script>
-            <script type="text/javascript" src="{% url 'javascript_catalog' %}"></script>
-            {% compress js %}
-                <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/utils.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/csrf_link_protect.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/language-picker.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.storageapi.min.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-table-responsive-dropdown-fix.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-async-collapsible.js"></script>
-                <script type="text/javascript" src="{{ STATIC_URL }}js/menu.js"></script>
-                <script type="text/javascript">
-                    $(function () {
-                        $("[data-toggle='tooltip']").tooltip();
-                    });
-                </script>
-                <script>hljs.initHighlightingOnLoad();</script>
-            {% endcompress %}
-            <script type="text/javascript" async
-                    src="{{ mathjax_location }}MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-            </script>
-       {% endblock %}
     </body>
 </html>
