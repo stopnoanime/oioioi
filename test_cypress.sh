@@ -27,7 +27,7 @@ pushd oioioi_cypress
     yarn
 
     # Wait for a server
-    ../wait-for-it.sh -t 30 "localhost:8000"
+    npx wait-on http://localhost:8000 --timeout 30000
 
     # Run tests
     CYPRESS_baseUrl=http://localhost:8000 yarn cy:${gui}
