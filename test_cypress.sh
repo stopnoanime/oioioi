@@ -24,7 +24,7 @@ done
 
 pushd oioioi_cypress
     # Resolve dependencies
-    yarn
+    # yarn
 
     # Wait for a server
     ../wait-for-it.sh -t 1 "localhost:8000"
