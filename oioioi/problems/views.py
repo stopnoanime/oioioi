@@ -305,7 +305,10 @@ def generate_problemset_tabs(request):
 
 
 def problemset_get_problems(request):
-    problems = search_problems_in_problemset(request.GET)
+    if settings.PROBLEM_TAGS_VISIBLE:
+        problems = search_problems_in_problemset(request.GET)
+    else:
+        problems = Problem.objects.all()
 
     if settings.PROBLEM_STATISTICS_AVAILABLE:
         # We annotate all of the statistics to assure that the display
@@ -470,7 +473,7 @@ def problemset_generate_view(request, page_title, problems, view_type):
 
     difficulty_tags = DifficultyTag.objects.filter(
         name__in=request.GET.getlist('difficulty')
-    )
+    ).order_by('name')
 
     return TemplateResponse(
         request,
@@ -560,7 +563,7 @@ def problem_site_view(request, site_key):
     )
     difficulty_options = (
         tag.full_name
-        for tag in DifficultyTagLocalization.objects.filter(language=get_language())
+        for tag in DifficultyTagLocalization.objects.filter(language=get_language()).order_by('full_name')
     )
     context = {
         'problem': problem,
@@ -1181,9 +1184,11 @@ def get_search_hints_view(request, view_type):
 
     result = []
     result.extend(list(get_problem_hints(query, view_type, request.user)))
-    result.extend(get_algorithm_and_difficulty_tag_hints(query))
-    result.extend(get_nonselected_origintag_hints(query))
-    result.extend(get_origininfovalue_hints(query))
+
+    if settings.PROBLEM_TAGS_VISIBLE:
+        result.extend(get_algorithm_and_difficulty_tag_hints(query))
+        result.extend(get_nonselected_origintag_hints(query))
+        result.extend(get_origininfovalue_hints(query))
 
     # Convert category names in results from lazy translation to strings,
     # since jsonify throws error if given lazy translation objects.
