@@ -76,7 +76,7 @@ function NotificationsClient(serverUrl, sessionId) {
         this.dropdownUpToDate = false;
         this.renderMessages();
     });
-
+  
     this.socketInit();
 }
 
